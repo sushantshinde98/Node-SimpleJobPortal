@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <title>Job Listing</title>
+    <style>
+  .container{
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+  form label{
+    font-weight: bolder;
+  }
+  
+   .cardbtnleft{
+float:left;
+  } 
+  .modal p{
+  width: 600px;
+  color: gray;
+}
+  .cardbtnright{
+float:right;
+  }
+.modal label{
+  font-weight: bolder;
+}
+.nav-link:hover {
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+      }
+.dropdown-menu .small-bold{
+  font-size: small;
+  font-weight: bolder;
+}
+.dropdown-menu .small{
+  font-size: small;
+}
+.dropdown-menu li{
+  background-color: rgb(234 250 255);
+}
+/* .dropdown-menu button{
+  position: fixed;
+    float: right;
+    left: 122px;
+    font-size: 10px;
+    top: 36px;
+} */
+    </style>
+  </head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">SimpleJobPortal</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/job-posting.html">Job Posting</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/job-listing">Job Listing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/job-applied">Job Applied</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<!-- Navbar -->
+  <!-- container -->
+  <div class="container">
+    <div class="row">
+
+      <% jobswithapplications.forEach((item)=>{ %>
+      <div class="col-lg-6">
+          <div class="card shadow-sm border border-dark m-2">
+            <div class="dropdown card-header">
+              <button class="btn btn-sm btn-dark dropdown-toggle cardbtnright" data-flip="false" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Total Applications <span class="badge bg-white text-dark rounded-pill"><%= item.jobApplications.length %></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <% item.jobApplications.forEach((applicant)=>{ %>
+                  
+                <li class="border border-dark">
+                    <!-- <a href="#infoModal<%= applicant._id %>" class="infobtn badge rounded-pill bg-info text-dark" data-bs-toggle="modal" data-bs-target="#infoModal<%= applicant._id %>">info</a> -->
+                    <button class="infobtn badge rounded-pill bg-info text-dark" data-bs-toggle="modal" data-bs-target="#infoModal<%= applicant._id %>">info</button>
+                    <span class="small-bold">Name:</span>
+                     <span class="small"><%=applicant.candidateName %></span>
+                  
+                    <span class="small-bold">Percentage:</span></td>
+                     <span class="small"><%=applicant.candidateDegreePercent %> %</span>
+            
+                </li>
+                <!-- Candidate info Modal -->
+               <div class="modal fade" role="dialog" id="infoModal<%= applicant._id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Candidate Info</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-2 row">
+                        <label for="" class="col-sm-2 col-form-label">Candidate Name:</label>
+                        <div class="col-sm-10">
+                          <p class="col-sm-2 col-form-label"><%=applicant.candidateName %></p>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label">Candidate Email:</label>
+                        <div class="col-sm-10">
+                          <p class="col-sm-2 col-form-label"><%= applicant.candidateEmail %></p>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label">Candidate Mobile:</label>
+                        <div class="col-sm-10">
+                          <p  class="col-sm-2 col-form-label"><%= applicant.candidateMobile %></p>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label">Candidate Degree:</label>
+                        <div class="col-sm-10">
+                          <p class="col-sm-2 col-form-label"><%= applicant.candidateDegree %></p>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label">Degree Percentage:</label>
+                        <div class="col-sm-10">
+                          <p class="col-sm-2 col-form-label"><%= applicant.candidateDegreePercent %></p>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label">Year Of Passing:</label>
+                        <div class="col-sm-10">
+                          <p class="col-sm-2 col-form-label"><%= applicant.candidateYearOfPass %></p>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label">Work Experience:</label>
+                        <div class="col-sm-10">
+                          <p class="col-sm-2 col-form-label"><%= applicant.candidateExperience %></p>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label">Skill:</label>
+                        <div class="col-sm-10">
+                          <p class="col-sm-2 col-form-label"><%= applicant.candidateSkills %></p>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label">Current Location:</label>
+                        <div class="col-sm-10">
+                          <p class="col-sm-2 col-form-label"><%= applicant.candidateLocation %></p>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label">Applied At:</label>
+                        <div class="col-sm-10">
+                          <p class="col-sm-2 col-form-label"><%= applicant.appliedAt %></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+               <!-- Candidate info close -->
+                <% }) %>
+              </ul>
+            </div>
+              <div class="card-body">
+                  <h5 class="card-title"><%= item.hiringPosition %></h5>
+                  <hr>
+                  <dl class="row">
+                    <dd class="col" style="margin: -5px;"><i class="bi bi-building"></i>&nbsp;Company:</dd>
+                    <dd class="col" style="margin: -5px;"><%= item.companyName %></dd>
+                  </dl>
+                  <dl class="row">
+                    <dd class="col" style="margin: -5px;"><i class="bi bi-geo-alt"></i>&nbsp;Location:</dd>
+                    <dd class="col" style="margin: -5px;"><%= item.jobLocation %></dd>
+                  </dl>
+                  <dl class="row">
+                    <dd class="col" style="margin: -5px;"><i class="bi bi-star"></i>&nbsp;Expericence:</dd>
+                    <dd class="col" style="margin: -5px;"><%= item.requiredExperiance %></dd>
+                  </dl>
+                  <dl class="row">
+                    <dd class="col" style="margin: -5px;"><i class="bi bi-wallet2"></i>&nbsp;Salary [PM]:</dd>
+                    <dd class="col" style="margin: -5px;"><%= item.salary %></dd>
+                  </dl>
+                  <button class="btn btn-dark btn-sm cardbtnleft" data-bs-toggle="modal" data-bs-target="#readModal<%= item._id %>">
+                    Read More&nbsp;<i class="bi bi-building"></i>
+                  </button>
+                  
+              </div>
+          </div>
+      </div>
+      <!-- The Modal1 -->
+      <div class="modal fade" id="readModal<%= item._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Job Description</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-2 row">
+                <label for="" class="col-sm-2 col-form-label">Employer Name:</label>
+                <div class="col-sm-10">
+                  <p class="col-sm-2 col-form-label"><%= item.employerName %></p>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="" class="col-sm-2 col-form-label">Employer Email:</label>
+                <div class="col-sm-10">
+                  <p class="col-sm-2 col-form-label"><%= item.employerEmail %></p>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="" class="col-sm-2 col-form-label">Employer Mobile:</label>
+                <div class="col-sm-10">
+                  <p  class="col-sm-2 col-form-label"><%= item.employerMobile %></p>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="" class="col-sm-2 col-form-label">Employer Designation:</label>
+                <div class="col-sm-10">
+                  <p class="col-sm-2 col-form-label"><%= item.employerDesignation %></p>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="" class="col-sm-2 col-form-label">Job Description:</label>
+                <div class="col-sm-10">
+                  <p class="col-sm-2 col-form-label"><%= item.jobDescription %></p>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="" class="col-sm-2 col-form-label">Technology Skills Required:</label>
+                <div class="col-sm-10">
+                  <p class="col-sm-2 col-form-label"><%= item.requiredTechnology %></p>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="" class="col-sm-2 col-form-label">Job location:</label>
+                <div class="col-sm-10">
+                  <p class="col-sm-2 col-form-label"><%= item.jobLocation %></p>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="" class="col-sm-2 col-form-label">Experience Required:</label>
+                <div class="col-sm-10">
+                  <p class="col-sm-2 col-form-label"><%= item.requiredExperiance %></p>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <% })%>
+</div>
+
+    </div>
+  </div>
+  <!-- container -->
+<footer class="bg-dark text-center text-lg-start text-white ">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © Copyright:
+    <a class="text-dark" href="#">**xyz**</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+  </body>
+</html>
